@@ -27,6 +27,36 @@ export default class ServiceAlumnos {
             })
         })
     }
+    getCursos(){
+        const headers = this.getToken();
+        return new Promise(function(resolve){
+            var request = "api/Alumnos/CursosToken";
+            var url = Global.urlEjemplos + request;
+            axios.get(url,{headers}).then(response=>{
+                resolve(response);
+            })
+        })
+    }
+    getAlumnosCursos(curso){
+        const headers = this.getToken();
+        return new Promise(function(resolve){
+            var request = "api/Alumnos/FiltrarCursoToken/"+curso;
+            var url = Global.urlEjemplos + request;
+            axios.get(url,{headers}).then(response=>{
+                resolve(response);
+            })
+        })
+    }
+    createAlumno(alumno){
+        const headers = this.getToken();
+        return new Promise(function(resolve){
+            var request = "api/Alumnos/InsertAlumnoToken";
+            var url = Global.urlEjemplos + request;
+            axios.post(url,alumno,{headers}).then(response=>{
+                resolve(response);
+            })
+        })
+    }
     
 
 }

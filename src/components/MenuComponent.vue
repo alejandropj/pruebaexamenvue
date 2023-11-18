@@ -26,7 +26,7 @@
               <router-link class="nav-link" to="/alumnos">Listar Alumnos</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/create-alumno">Crear Alumno</router-link>
+              <router-link class="nav-link" to="/crear">Crear Alumno</router-link>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -39,7 +39,9 @@
                 Cursos
               </a>
               <ul class="dropdown-menu">
-                <li><router-link class="dropdown-item" to="/curso">Action</router-link></li>
+                <li v-for="curso in cursos" :key="curso">
+                  <router-link class="dropdown-item" :to="'/curso/'+curso">{{curso}}</router-link>
+                  </li>
               </ul>
             </li>
           </ul>
@@ -50,8 +52,19 @@
 </template>
 
 <script>
+import ServiceAlumnos from '@/services/ServiceAlumnos';
+const service = new ServiceAlumnos();
 export default {
-  name: "MenuComponent"
+  name: "MenuComponent",
+  data(){
+    return{
+      cursos:null
+    }
+  },mounted(){
+    service.getCursos().then(res=>{
+      this.cursos = res.data
+    })
+  }
 };
 </script>
 
