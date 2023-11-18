@@ -27,6 +27,16 @@ export default class ServiceAlumnos {
             })
         })
     }
+    getAlumno(id){
+        const headers = this.getToken();
+        return new Promise(function(resolve){
+            var request = "api/Alumnos/FindAlumnoToken/"+id;
+            var url = Global.urlEjemplos + request;
+            axios.get(url,{headers}).then(response=>{
+                resolve(response);
+            })
+        })
+    }
     getCursos(){
         const headers = this.getToken();
         return new Promise(function(resolve){
@@ -53,6 +63,16 @@ export default class ServiceAlumnos {
             var request = "api/Alumnos/InsertAlumnoToken";
             var url = Global.urlEjemplos + request;
             axios.post(url,alumno,{headers}).then(response=>{
+                resolve(response);
+            })
+        })
+    }
+    modifyAlumno(alumno){
+        const headers = this.getToken();
+        return new Promise(function(resolve){
+            var request = "api/Alumnos/UpdateAlumnoToken";
+            var url = Global.urlEjemplos + request;
+            axios.put(url,alumno,{headers}).then(response=>{
                 resolve(response);
             })
         })
